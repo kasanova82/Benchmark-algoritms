@@ -62,12 +62,12 @@ namespace Homework_ASTD
                     foreach (int item in my_array) Console.Write(" " + item);
                     Console.WriteLine();
             Console.WriteLine("Выбери теперь Сортировки тип:");
-            Console.WriteLine("1 Поразрядочка:");
-            Console.WriteLine("2 Вставочка:");
-            Console.WriteLine("3 Шелла сортировка:");
-            Console.WriteLine("4 Выбором сортировка");
-            Console.WriteLine("5 QuickSort");
-            Console.WriteLine("6 Слиянием сортировка");
+            Console.WriteLine("1 Поразрядочка On*k:");
+            Console.WriteLine("2 Вставочка: On2");
+            Console.WriteLine("3 Шелла сортировка:On Logn");
+            Console.WriteLine("4 Выбором сортировка Оn2");
+            Console.WriteLine("5 QuickSort On Logn");
+            Console.WriteLine("6 Слиянием сортировка On Logn");
             int sort;
             while (true)
             {
@@ -359,17 +359,17 @@ namespace Homework_ASTD
             return marker - 1;
            }
 
-            static void Quicksort(int[] my_array, int start, int lenght)// Быстрая сортировка
-
-           {
-               if (start >= lenght)
-            {
-                return;
-            }
-            int pivot = Partition(my_array, start, lenght);
-            Quicksort(my_array, start, pivot - 1);
-            Quicksort(my_array, pivot + 1, lenght);
-           }
+//            static void Quicksort(int[] my_array, int start, int lenght)// Быстрая сортировка вариант с выбором пивота(не работает)
+//
+  //         {
+    //           if (start >= lenght)
+      //      {
+        //        return;
+          //  }
+//            int pivot = Partition(my_array, start, lenght);
+  //          Quicksort(my_array, start, pivot - 1);
+    //        Quicksort(my_array, pivot + 1, lenght);
+      //     }
 
             static Int32[] Merge_Sort(Int32[] massive)
         {
@@ -418,6 +418,25 @@ namespace Homework_ASTD
             }
             }
 
+            static void Quicksort(int[] array, int first, int last)
+        {
+            int p = array[(last - first) / 2 + first];
+            int temp;
+            int i = first, j = last;
+            while (i <= j) {
+                while (array[i] < p && i <= last) ++i;
+                while (array[j] > p && j >= first) --j;
+                if (i <= j)
+                {
+                    temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                    ++i; --j;
+                }
+            }
+            if (j > first) Quicksort(array, first, j);
+            if (i < last) Quicksort(array, i, last);
+        }// Быстрая сортировка с простым пивотом на 3\4
 
 
     }
